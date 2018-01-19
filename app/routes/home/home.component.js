@@ -26,7 +26,7 @@ export class Home extends PureComponent {
   };
 
   state = {
-    loaded: false,
+    resultsSent: false,
     browser: '',
     device: '',
     os: '',
@@ -65,18 +65,26 @@ export class Home extends PureComponent {
   }
 
   componentDidUpdate( { items } ) {
-    const { os, device, browser, mountingComponent, fetchingData, firstContentfulPaintDuration, timeToInteractiveDuration } = this.state;
+    const {
+      resultsSent, os, device, browser,
+      mountingComponent, fetchingData, firstContentfulPaintDuration, timeToInteractiveDuration
+    } = this.state;
 
     if (items !== this.props.items) {
       const fetchingData = this.perfume.end('FetchingData');
       this.setState({ fetchingData });
     }
 
-    if (mountingComponent && fetchingData && firstContentfulPaintDuration && timeToInteractiveDuration) {
-
+    if (!resultsSent && mountingComponent && fetchingData && firstContentfulPaintDuration && timeToInteractiveDuration) {
       this.props.setCurrentResult({
         os, device, browser, mountingComponent, fetchingData, firstContentfulPaintDuration, timeToInteractiveDuration
       });
+
+      this.setState({
+        resultsSent: true,
+      });
+
+      console.log('results sent');
     }
   }
 
