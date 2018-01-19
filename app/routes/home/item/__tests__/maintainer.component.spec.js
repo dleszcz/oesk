@@ -3,7 +3,7 @@ import { expect } from 'chai';
 import { shallow } from 'enzyme';
 import { fromJS } from 'immutable';
 
-import { Maintainer } from '../maintainer.component';
+import { Maintainer } from '../item.component';
 
 
 describe('Maintainer: Component', () => {
@@ -21,11 +21,11 @@ describe('Maintainer: Component', () => {
 
   it('should render Maintainer root', () => {
     const wrapper = shallow(component({}));
-    expect(wrapper.find('.maintainer')).to.have.length(1);
+    expect(wrapper.find('.item')).to.have.length(1);
   });
 
-  it('should render proper text inside .maintainer', () => {
+  it('should render proper text inside .item', () => {
     const wrapper = shallow(component({}));
-    expect(wrapper.find('.maintainer').render().text()).to.equal('John Doe <john.doe@example.com>');
+    expect(wrapper.find('.item').render().text()).to.equal('John Doe <john.doe@example.com>');
   });
 });

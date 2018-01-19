@@ -7,7 +7,7 @@ import Helmet from 'react-helmet';
 
 import { Home } from '../home.component';
 import messages from '../home.messages';
-import { MaintainerList } from '../maintainerList/maintainerList.component';
+import { MaintainerList } from '../itemsList/itemsList.component';
 import { LanguageSelector } from '../languageSelector/languageSelector.component';
 
 

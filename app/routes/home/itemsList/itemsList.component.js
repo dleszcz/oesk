@@ -2,25 +2,25 @@ import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import messages from './maintainersList.messages';
-import { Maintainer } from '../maintainer/maintainer.component';
+import messages from './itemsList.messages';
+import { Item } from '../item/item.component';
 
 
-export class MaintainerList extends PureComponent {
+export class ItemsList extends PureComponent {
   static propTypes = {
     items: PropTypes.object.isRequired,
   };
 
   render() {
     return (
-      <div className="maintainer-list">
-        <h2 className="maintainer-list__title">
+      <div className="items-list">
+        <h2 className="items-list__title">
           <FormattedMessage {...messages.title} />:
         </h2>
 
         <ul>
           {this.props.items.toArray().map((item, key) => (
-            <Maintainer key={key} data={item} />
+            <Item key={key} data={item} />
           ))}
         </ul>
       </div>

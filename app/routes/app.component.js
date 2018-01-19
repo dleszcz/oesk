@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
-import Perfume from 'perfume.js';
 import { IntlProvider } from 'react-intl';
 import { get } from 'lodash';
 
@@ -22,8 +21,6 @@ export class App extends PureComponent {
   };
 
   componentWillMount() {
-    this.perfume.start('Mounting');
-    this.perfume.start('Painting');
     const language = get(this.props.match, 'params.lang', DEFAULT_LOCALE);
 
     if (appLocales.indexOf(language) === -1) {
@@ -33,27 +30,6 @@ export class App extends PureComponent {
       this.props.setLanguage(language);
     }
   }
-
-  componentDidMount() {
-    const mounting = this.perfume.end('Mounting');
-    const painting = this.perfume.endPaint('Painting');
-    const { firstContentfulPaintDuration, timeToInteractiveDuration } = this.perfume;
-
-    const metrics = {
-      mounting,
-      painting,
-      firstContentfulPaintDuration,
-      timeToInteractiveDuration,
-    };
-
-    console.log('metrics', metrics);
-  }
-
-  perfume = new Perfume({
-    logging: true,
-    firstContentfulPaint: true,
-    timeToInteractive: true,
-  });
 
   render() {
     if (!this.props.language) {
