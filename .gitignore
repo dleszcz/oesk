@@ -13,3 +13,5 @@ dist
 npm-debug.log
 .idea
 app/environment/local.js
+app/environment/development.js
+app/environment/production.js

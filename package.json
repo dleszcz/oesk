@@ -85,6 +85,7 @@
     "cross-env": "5.0.5",
     "es5-shim": "^4.5.9",
     "express": "4.15.4",
+    "firebase": "^4.9.0",
     "fontfaceobserver": "2.0.13",
     "history": "^4.7.2",
     "immutable": "3.8.1",
