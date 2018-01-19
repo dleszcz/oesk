@@ -1,6 +1,7 @@
 @import "itemsList/itemsList";
 
 .home {
+  font-family: Verdana;
   padding: 40px;
 }
 
@@ -15,4 +16,24 @@
   display: inline-block;
   margin-right: 20px;
   vertical-align: middle;
+}
+
+.home__results {
+  padding: 20px 0;
+}
+
+.home__results-title {
+
+}
+
+.home__results-value {
+  padding-left: 10px;
+}
+
+.home__loading-status--waiting {
+  color: red;
+}
+
+.home__loading-status--loaded {
+  color: green;
 }
