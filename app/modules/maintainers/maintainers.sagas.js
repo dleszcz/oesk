@@ -6,7 +6,7 @@ import { MaintainersTypes, MaintainersActions } from './maintainers.redux';
 
 export function* fetchMaintainers({ language }) {
   try {
-    const { data } = yield api.get('fixtures/maintainers.json', { params: { language } });
+    const { data } = yield api.get('https://jsonplaceholder.typicode.com/photos', { params: { language } });
 
     yield put(MaintainersActions.fetchSuccess(data));
   } catch (e) {

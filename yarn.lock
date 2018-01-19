@@ -7373,6 +7373,12 @@ performance-now@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
 
+perfume.js@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/perfume.js/-/perfume.js-0.5.0.tgz#2c423b90afef7665c5d1d8ea649776b8d17c1eb9"
+  dependencies:
+    tti-polyfill "^0.2.2"
+
 phantomjs-prebuilt@^2.1.10:
   version "2.1.14"
   resolved "https://registry.yarnpkg.com/phantomjs-prebuilt/-/phantomjs-prebuilt-2.1.14.tgz#d53d311fcfb7d1d08ddb24014558f1188c516da0"
@@ -9588,6 +9594,10 @@ trim@0.0.1:
 tryit@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/tryit/-/tryit-1.0.3.tgz#393be730a9446fd1ead6da59a014308f36c289cb"
+
+tti-polyfill@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/tti-polyfill/-/tti-polyfill-0.2.2.tgz#f7bbf71b13afa9edf60c8bb0d0c05f134e1513b9"
 
 tty-browserify@0.0.0:
   version "0.0.0"
