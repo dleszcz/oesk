@@ -3,6 +3,7 @@ import { combineReducers } from 'redux-immutable';
 import { reducer as routerReducer } from './router/router.redux';
 import { reducer as localesReducer } from './locales/locales.redux';
 import { reducer as maintainersReducer } from './maintainers/maintainers.redux';
+import { reducer as dataReducer } from './data/data.redux';
 
 
 export default function createReducer() {
@@ -10,5 +11,6 @@ export default function createReducer() {
     route: routerReducer,
     maintainers: maintainersReducer,
     locales: localesReducer,
+    data: dataReducer,
   });
 }

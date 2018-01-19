@@ -18,8 +18,8 @@ export class App extends PureComponent {
       push: PropTypes.func.isRequired,
     }).isRequired,
     location: PropTypes.object.isRequired,
+    watchData: PropTypes.func.isRequired,
   };
-
   componentWillMount() {
     const language = get(this.props.match, 'params.lang', DEFAULT_LOCALE);
 
@@ -29,6 +29,10 @@ export class App extends PureComponent {
     } else {
       this.props.setLanguage(language);
     }
+  }
+
+  componentDidMount() {
+    this.props.watchData();
   }
 
   render() {
