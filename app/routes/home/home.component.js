@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import Perfume from 'perfume.js';
+import Platform from 'platform';
+import moment from 'moment';
+
 import messages from './home.messages';
 import { ItemsList } from './itemsList/itemsList.component';
 import { LanguageSelector } from './languageSelector/languageSelector.component';
@@ -24,6 +27,9 @@ export class Home extends PureComponent {
 
   state = {
     loaded: false,
+    browser: '',
+    device: '',
+    os: '',
     mountingComponent: 0,
     fetchingData: 0,
     firstContentfulPaintDuration: 0,
@@ -37,6 +43,13 @@ export class Home extends PureComponent {
     this.props.fetchMaintainers(this.props.language);
     this.waitForCFPInterval = this.waitForCFP();
     this.waitForTTIInterval = this.waitForTTI();
+
+    console.log('platform', Platform);
+    this.setState({
+      browser: Platform.name,
+      os: Platform.os.family,
+      device: Platform.product,
+    });
   }
 
   componentDidMount() {
@@ -52,9 +65,18 @@ export class Home extends PureComponent {
   }
 
   componentDidUpdate( { items } ) {
+    const { os, device, browser, mountingComponent, fetchingData, firstContentfulPaintDuration, timeToInteractiveDuration } = this.state;
+
     if (items !== this.props.items) {
       const fetchingData = this.perfume.end('FetchingData');
       this.setState({ fetchingData });
+    }
+
+    if (mountingComponent && fetchingData && firstContentfulPaintDuration && timeToInteractiveDuration) {
+
+      this.props.setCurrentResult({
+        os, device, browser, mountingComponent, fetchingData, firstContentfulPaintDuration, timeToInteractiveDuration
+      });
     }
   }
 
@@ -66,41 +88,46 @@ export class Home extends PureComponent {
     timeToInteractive: true,
   });
 
-  waitForTTI = () => setInterval(() => {
-      console.log('waiting for tti');
-      if (this.perfume.timeToInteractiveDuration !== 0) {
-        this.setState({
-          timeToInteractiveDuration: this.perfume.timeToInteractiveDuration,
-        });
-        clearInterval(this.waitForTTIInterval);
-      }
-  }, 5000);
-
   waitForCFP = () => setInterval(() => {
-      console.log('waiting for cfp');
-      if (this.perfume.firstContentfulPaintDuration !== 0) {
-        this.setState({
-          firstContentfulPaintDuration: this.perfume.firstContentfulPaintDuration
-        });
-        clearInterval(this.waitForCFPInterval);
-      }
+    console.log('waiting for cfp');
+    if (this.perfume.firstContentfulPaintDuration !== 0) {
+      this.setState({
+        firstContentfulPaintDuration: this.perfume.firstContentfulPaintDuration
+      });
+      clearInterval(this.waitForCFPInterval);
+    }
   }, 2500);
 
-  render() {
 
-    const { mountingComponent, fetchingData, firstContentfulPaintDuration, timeToInteractiveDuration } = this.state;
+  waitForTTI = () => setInterval(() => {
+    console.log('waiting for tti');
+    if (this.perfume.timeToInteractiveDuration !== 0) {
+      this.setState({
+        timeToInteractiveDuration: this.perfume.timeToInteractiveDuration,
+      });
+      clearInterval(this.waitForTTIInterval);
+    }
+  }, 5000);
+
+
+  render() {
+    const { browser, product, os, mountingComponent, fetchingData, firstContentfulPaintDuration, timeToInteractiveDuration } = this.state;
 
     return (
       <div className="home">
         <Helmet title="Homepage" />
 
         <h1 className="home__title">
-          <i className="home__title-logo" />
           <FormattedMessage {...messages.welcome} />
         </h1>
 
         <div className="home__results">
           <h2>Your results:</h2>
+          <div>
+            <span className="home__results-info">
+              {`${browser}, ${os}, ${product}`}
+            </span>
+          </div>
           <div>
             <span className="home__results-title">Mounting Component:</span>
             <span className="home__results-value">{mountingComponent ? mountingComponent : '...'}</span>
