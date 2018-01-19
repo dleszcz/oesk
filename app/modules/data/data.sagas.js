@@ -40,7 +40,7 @@ function* watchChanges() {
   }
 }
 
-function* pushItem({ data }) {
+function* setCurrentResult({ data }) {
   try {
     yield dbRef.push().set({
       createdAt: moment().unix(),
@@ -53,7 +53,7 @@ function* pushItem({ data }) {
 
 export default function* watchData() {
   yield takeLatest(DataTypes.WATCH, watchChanges);
-  yield takeLatest(DataTypes.PUSH_ITEM, pushItem);
+  yield takeLatest(DataTypes.SET_CURRENT_RESULT, setCurrentResult);
 }
 
 

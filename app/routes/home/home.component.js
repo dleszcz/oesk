@@ -22,6 +22,7 @@ export class Home extends PureComponent {
     history: PropTypes.shape({
       push: PropTypes.func.isRequired,
     }).isRequired,
+    setCurrentResult: PropTypes.func.isRequired,
   };
 
   state = {
@@ -41,6 +42,7 @@ export class Home extends PureComponent {
   }
 
   componentDidMount() {
+    this.props.setCurrentResult({ data: 'data' });
     const mountingComponent = this.perfume.end('MountingComponent');
     const { firstContentfulPaintDuration, timeToInteractiveDuration } = this.perfume;
 
