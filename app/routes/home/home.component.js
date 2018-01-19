@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Helmet from 'react-helmet';
 import { FormattedMessage } from 'react-intl';
 import Perfume from 'perfume.js';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 import Platform from 'platform';
 import moment from 'moment';
 
@@ -23,6 +24,7 @@ export class Home extends PureComponent {
       push: PropTypes.func.isRequired,
     }).isRequired,
     setCurrentResult: PropTypes.func.isRequired,
+    averageResultData: PropTypes.array.isRequired,
   };
 
   state = {
@@ -53,7 +55,13 @@ export class Home extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.setCurrentResult({ data: 'data' });
+    this.props.setCurrentResult({
+      mountingComponent: Math.random() * 1000,
+      fetchingData: Math.random() * 1000,
+      firstContentfulPaintDuration: Math.random() * 1000,
+      timeToInteractiveDuration: Math.random() * 1000,
+    });
+
     const mountingComponent = this.perfume.end('MountingComponent');
     this.setState({ mountingComponent });
   }
@@ -149,6 +157,17 @@ export class Home extends PureComponent {
         { !this.props.items.size
           ? <span className="home__loading-status home__loading-status--waiting">Loading content...</span>
           : <span className="home__loading-status home__loading-status--loaded">Loaded content</span> }
+
+        <BarChart width={600} height={300} data={this.props.averageResultData}
+          margin={{ top: 5, right: 30, left: 20, bottom: 5 }}>
+          <XAxis dataKey="name" />
+          <YAxis />
+          <CartesianGrid strokeDasharray="3 3" />
+          <Tooltip />
+          <Legend />
+          <Bar dataKey="pv" fill="#8884d8" />
+          <Bar dataKey="uv" fill="#82ca9d" />
+        </BarChart>
 
         <ItemsList items={this.props.items} />
 

@@ -8,10 +8,12 @@ import { selectMaintainersItems } from '../../modules/maintainers/maintainers.se
 import { LocalesActions } from '../../modules/locales/locales.redux';
 import { selectLocalesLanguage } from '../../modules/locales/locales.selectors';
 import { DataActions } from '../../modules/data/data.redux';
+import { selectAverageResultData } from '../../modules/data/data.selectors';
 
 const mapStateToProps = createStructuredSelector({
   items: selectMaintainersItems,
   language: selectLocalesLanguage,
+  averageResultData: selectAverageResultData,
 });
 
 export const mapDispatchToProps = (dispatch) => bindActionCreators({

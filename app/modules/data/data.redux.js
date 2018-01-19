@@ -18,7 +18,7 @@ const DataInitialState = Record({
 const INITIAL_STATE = new DataInitialState();
 
 const setItems = (state, { data }) => state
-  .set('items', data);
+  .set('items', fromJS(data));
 
 const init = (state) => state
   .set('initialized', true);
